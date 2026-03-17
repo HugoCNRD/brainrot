@@ -14,6 +14,8 @@ def process_message(content):
         return "7 !"
     if content_clean.lower() == "six":
         return "Seven !"
+    if content_clean == "Six":  # cas spécial majuscules
+        return "Seven !"
 
     # Otherwise strike everything except "6"
     result = ""
@@ -38,11 +40,15 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # 🚫 Ignore messages starting with "http"
+   
     if message.content.startswith("http"):
         return
 
-    if any(x in message.content for x in ["6", "Six", "six"]):
+    
+    if message.content.startswith("<@"):
+        return
+
+    if any(x in message.content for x in ["6", "Six", "six", "SIX"]):
         response = process_message(message.content)
         await message.reply(response)
 
