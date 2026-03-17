@@ -1,3 +1,4 @@
+
 import discord
 import os
 
@@ -7,74 +8,71 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 def process_message(content):
-    # Si le message est uniquement "6"
-    if content.strip() == "6":
+    content_clean = content.strip()
+
+    # Direct responses
+    if content_clean.lower() == "6":
         return "7 !"
-
-def process_message(content):
-    # Si le message est uniquement "6"
-    if content.strip() == "six":
+    if content_clean.lower() == "six":
+        return "Seven !"
+    if content_clean.lower() == "Six":
         return "Seven !"
 
-def process_message(content):
-    # Si le message est uniquement "6"
-    if content.strip() == "Six":
-        return "Seven !"
-    
-    # Sinon, on barre tout sauf les "6"
+
+    # Otherwise strike everything except "6"
     result = ""
     for char in content:
         if char == "6":
             result += "6"
         elif char.strip() == "":
-            result += char  # garder les espaces
+            result += char
         else:
             result += f"~~{char}~~"
-    
+
     return f"{result}\n7 !"
 
-    result = ""
+result = ""
     for char in content:
         if char == "Six":
             result += "Six"
         elif char.strip() == "":
-            result += char  # garder les espaces
+            result += char
         else:
             result += f"~~{char}~~"
-    
-    return f"{result}\nSeven !"
 
-    result = ""
+     return f"{result}\nSeven !"
+
+result = ""
     for char in content:
         if char == "six":
             result += "six"
         elif char.strip() == "":
-            result += char  # garder les espaces
+            result += char
         else:
             result += f"~~{char}~~"
-    
+
     return f"{result}\nSeven !"
+
 
 @client.event
 async def on_ready():
     print(f'Connecté en tant que {client.user}')
+
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    if "6" in message.content:
+    # 🚫 Ignore messages starting with "http"
+    if message.content.startswith("http"):
+        return
+
+    if any(x in message.content for x in ["6", "Six", "six"]):
         response = process_message(message.content)
         await message.reply(response)
 
-    if "Six" in message.content:
-        response = process_message(message.content)
-        await message.reply(response)
-
-    if "six" in message.content:
-        response = process_message(message.content)
-        await message.reply(response)
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 client.run(TOKEN)
+ 
