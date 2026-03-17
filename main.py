@@ -14,8 +14,6 @@ def process_message(content):
         return "7 !"
     if content_clean.lower() == "six":
         return "Seven !"
-   if content_clean.lower() == "Six":
-        return "Seven !"
 
     # Otherwise strike everything except "6"
     result = ""
