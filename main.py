@@ -1,4 +1,3 @@
-
 import discord
 import os
 
@@ -15,9 +14,8 @@ def process_message(content):
         return "7 !"
     if content_clean.lower() == "six":
         return "Seven !"
-    if content_clean.lower() == "Six":
+   if content_clean.lower() == "Six":
         return "Seven !"
-
 
     # Otherwise strike everything except "6"
     result = ""
@@ -30,28 +28,6 @@ def process_message(content):
             result += f"~~{char}~~"
 
     return f"{result}\n7 !"
-
-result = ""
-    for char in content:
-        if char == "Six":
-            result += "Six"
-        elif char.strip() == "":
-            result += char
-        else:
-            result += f"~~{char}~~"
-
-     return f"{result}\nSeven !"
-
-result = ""
-    for char in content:
-        if char == "six":
-            result += "six"
-        elif char.strip() == "":
-            result += char
-        else:
-            result += f"~~{char}~~"
-
-    return f"{result}\nSeven !"
 
 
 @client.event
@@ -75,4 +51,3 @@ async def on_message(message):
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 client.run(TOKEN)
- 
